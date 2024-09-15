@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="text-center">Search Results for "{{ query }}"</h2>
+        {% if theses %}
+            <ul class="list-group mt-4">
+                {% for thesis in theses %}
+                    <li class="list-group-item">
+                        <strong>{{ thesis.title }}</strong><br>
+                        Author: {{ thesis.author }}<br>
+                        Year: {{ thesis.year }}<br>
+                        Student: {{ thesis.student or 'N/A' }}<br>
+                        Advisor: {{ thesis.advisor or 'N/A' }}
+                    </li>
+                {% endfor %}
+            </ul>
+        {% else %}
+            <div class="alert alert-warning mt-4">No results found for "{{ query }}"</div>
+        {% endif %}
+        <div class="text-center mt-4">
+            <a href="{{ url_for('search') }}" class="btn btn-primary">New Search</a>
+        </div>
+    </div>
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
